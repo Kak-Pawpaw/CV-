@@ -98,14 +98,29 @@ if(closeBtnInner) {
 
 
         // --- 2. INTRO LOADER ---
-        const introTl = gsap.timeline();
-        introTl
-            .to("#typewriter-text", { text: "INITIALIZING PORTOFOLIO...", duration: 2, ease: "none" })
-            .to({}, { duration: 0.5 }) 
-            .to("#intro-loader", { yPercent: -100, duration: 1.2, ease: "expo.inOut" })
-            .to("#main-content", { opacity: 1, duration: 0.5 }, "-=0.8")
-            .from(".hero-text-container h1", { y: 100, opacity: 0, duration: 1, ease: "power4.out" }, "-=0.5")
-            .from("[data-gsap='reveal']", { y: 50, opacity: 0, stagger: 0.2, duration: 0.8 }, "-=0.8");
+// --- 2. INTRO LOADER (UPDATE LOGIKA AOS) ---
+const introTl = gsap.timeline({
+    // JALANKAN AOS HANYA SETELAH LOADING SELESAI
+    onComplete: () => {
+        if (typeof AOS !== 'undefined') {
+            // Kita refresh atau init ulang di sini biar animasi mulai pas mata memandang
+            AOS.init({
+                once: true,       // Animasi sekali jalan
+                mirror: false,
+                offset: 50,
+                duration: 1000,
+                easing: 'ease-out-cubic',
+            });
+            AOS.refresh(); // Pastikan posisi dihitung ulang
+        }
+    }
+});
+
+introTl
+    .to("#typewriter-text", { text: "INITIALIZING PORTOFOLIO...", duration: 2, ease: "none" })
+    .to({}, { duration: 0.5 }) 
+    .to("#intro-loader", { yPercent: -100, duration: 1.2, ease: "expo.inOut" })
+    .to("#main-content", { opacity: 1, duration: 0.5 }, "-=0.8");
 
 
         // --- 3. PROFILE REVEAL ---
@@ -297,87 +312,51 @@ const SHEET_API_URL = 'https://script.google.com/macros/s/AKfycbz69xCSAORiSx9PRp
 async function loadReviews() {
     const track = document.getElementById('review-track');
     
-    // 1. Cek dulu apakah track ada (untuk safety)
+    // 1. Safety Check
     if (!track) return;
 
-try {
-        console.log("Mencoba mengambil data dari:", SHEET_API_URL); // Cek URL di console
-        
+    try {
+        console.log("Mencoba mengambil data...");
         const response = await fetch(SHEET_API_URL);
         
-        // Cek status respon
-        if (!response.ok) {
-            throw new Error(`HTTP Error! Status: ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`HTTP Error! Status: ${response.status}`);
 
         const reviews = await response.json();
-        console.log("Data berhasil didapat:", reviews);
+        console.log("Data berhasil:", reviews);
         
-        // 3. Opsi Styling Acak (Agar variatif)
-// Pilih Warna Lampu (Hex Codes) sesuai tema
-            const neonColors = ['#00f3ff', '#bd00ff', '#39ff14', '#ff003c'];
-            const randomColor = neonColors[Math.floor(Math.random() * neonColors.length)];
-            
-            // Tentukan class text warna bintang agar matching dengan lampunya
-            let starColorClass = '';
-            if(randomColor === '#00f3ff') starColorClass = 'text-neonCyan';
-            else if(randomColor === '#bd00ff') starColorClass = 'text-neonPurple';
-            else if(randomColor === '#39ff14') starColorClass = 'text-neonGreen';
-            else starColorClass = 'text-red-500';
+        // 2. DEFINISI STYLE (Wajib ada di sini)
+        const styles = [
+            { border: 'border-neonCyan', bg: 'from-neonCyan to-blue-600', text: 'text-neonCyan' },
+            { border: 'border-neonPurple', bg: 'from-neonPurple to-pink-600', text: 'text-neonPurple' },
+            { border: 'border-neonGreen', bg: 'from-neonGreen to-emerald-600', text: 'text-neonGreen' },
+            { border: 'border-red-500', bg: 'from-red-500 to-orange-600', text: 'text-red-500' }
+        ];
 
-            // Buat Element Kartu Baru dengan Style NEON
-            const card = document.createElement('div');
-            
-            // Tambahkan class neon-card dan p-6
-            // Pastikan class di JS sama dengan di HTML agar tidak belang
-            card.className = `review-card tech-panel p-6 rounded-lg w-[300px] flex-shrink-0 border-l-2 ${style.border}`;
-            
-            // PENTING: Inject variable warna ke CSS inline
-            card.style.setProperty('--neon-color', randomColor);
-            
-            card.innerHTML = `
-                <div class="neon-card-content">
-                    <div class="flex items-center gap-3 mb-3">
-                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 border border-white/20"></div>
-                        <div>
-                            <h4 class="font-mono text-xs font-bold text-white">${safeName}</h4>
-                            <p class="text-[10px] text-codeGray">Project: ${item.project || 'Joki Tugas'}</p>
-                        </div>
-                    </div>
-                    <p class="font-sans text-sm text-gray-300 italic mb-3">"${item.review}"</p>
-                    <div class="flex ${starColorClass} text-xs">
-                        ${starsHtml}
-                    </div>
-                </div>
-            `;
-
-            track.appendChild(card);
-        // 4. Loop data baru & Masukkan ke HTML
+        // 3. LOOP DATA (Hanya kode di dalam sini yang akan dijalankan per review)
         reviews.forEach(item => {
-            // --- LOGIKA PRIVASI NAMA ---
+            
+            // A. Ambil Nama (Sensor)
             let safeName;
             if (item.nama && item.nama.length > 3) {
-                // Ambil 3 huruf depan + angka acak (Misal: Budi -> Bud_882)
                 safeName = item.nama.substring(0, 3) + "_" + Math.floor(Math.random() * 999); 
             } else {
                 safeName = "Client_" + Math.floor(Math.random() * 1000);
             }
 
-            // Pilih gaya acak
+            // B. Pilih Style Acak
             const style = styles[Math.floor(Math.random() * styles.length)];
 
-            // Buat bintang rating
+            // C. Bintang Rating
             let starsHtml = '';
-            // Pastikan rating minimal 1, maksimal 5
             const rating = Math.min(Math.max(parseInt(item.rating) || 5, 1), 5); 
             for(let i=0; i<rating; i++) starsHtml += '<i class="fa-solid fa-star"></i>';
 
-            // Buat Element Kartu Baru
+            // D. Buat Element Kartu
             const card = document.createElement('div');
-            // Class harus SAMA PERSIS dengan yang statis agar ukurannya rapi
+            
+            // Class ini SAMA PERSIS dengan HTML statis agar tampilan konsisten
             card.className = `review-card tech-panel p-6 rounded-lg w-[300px] flex-shrink-0 border-l-2 ${style.border}`;
             
-            // Isi HTML Kartu
             card.innerHTML = `
                 <div class="flex items-center gap-3 mb-3">
                     <div class="w-8 h-8 rounded-full bg-gradient-to-br ${style.bg}"></div>
@@ -392,16 +371,13 @@ try {
                 </div>
             `;
 
-            // PENTING: appendChild = Menambah di belakang (TIDAK MENGHAPUS YANG LAMA)
             track.appendChild(card);
         });
 
     } catch (error) {
-        // Ini akan mencetak error detail di Console (F12)
-        console.error('DETAIL ERROR:', error); 
-        console.log('Gagal memuat review dinamis, menampilkan review statis saja.');
+        console.error('Error:', error);
     } finally {
-        // 5. Jalankan Animasi SETELAH semua data (Statis + Dinamis) tergabung
+        // 4. Jalankan Animasi Bergerak
         startMarquee();
     }
 }
@@ -518,5 +494,6 @@ function triggerAntiGravity() {
         });
     }
 }
+
 // Panggil fungsi utama
 loadReviews();

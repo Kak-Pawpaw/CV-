@@ -31,11 +31,13 @@
             }
         }
     </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body class="font-sans">
 
@@ -82,27 +84,54 @@
             <a href="#services" class="mobile-link text-2xl font-display uppercase hover:text-neonCyan">Services</a>
         </div>
 
-        <section id="hero-title" class="h-screen flex flex-col justify-center px-4 md:px-20 relative overflow-hidden">
-            <div class="hero-text-container z-20 mt-10 md:mt-0">
-                <p class="font-mono text-neonCyan text-xs md:text-base mb-4 tracking-widest" data-gsap="reveal">
-    <span class="text-red-500 font-bold drop-shadow-md">> SYSTEM_READY.</span> 
-    <span class="text-neonPurple">Welcome everyone,</span> 
-    let me introduce myself.
-</p>
-<h1 class="font-display font-extrabold leading-none uppercase mb-2" 
-    style="font-size: clamp(2rem, 12vw, 10rem);">
-    RAFI RIZKY<br>
-    <span class="text-transparent bg-clip-text bg-cyber-gradient text-glow">SANTOSA</span>
-</h1>
-                <h2 class="font-mono text-lg md:text-4xl text-codeGray mt-1" data-gsap="reveal">
-                    <span class="text-neonPurple">[</span> Full-Stack Architect <span class="text-neonPurple">]</span>
-                </h2>
-            </div>
+<section id="hero-title" class="h-screen flex flex-col justify-center px-4 md:px-20 relative overflow-hidden">
+    <div class="hero-text-container z-20 mt-10 md:mt-0">
+        
+        <p class="font-mono text-neonCyan text-xs md:text-base mb-4 tracking-widest" 
+           data-aos="fade-right" data-aos-duration="1000" data-aos-delay="200">
+            <span class="text-red-500 font-bold drop-shadow-md">> SYSTEM_READY.</span> 
+            <span class="text-neonPurple">Welcome everyone,</span> 
+            let me introduce myself.
+        </p>
+
+        <h1 class="font-display font-extrabold leading-none uppercase mb-2" 
+            style="font-size: clamp(2rem, 12vw, 10rem);">
             
-<div class="absolute bottom-28 md:bottom-10 left-0 w-full text-center font-mono text-[10px] md:text-xs text-codeGray animate-bounce">
-    SCROLL TO INITIALIZE PROFILE <i class="fa-solid fa-chevron-down ml-2 text-neonCyan"></i>
-</div>
-        </section>
+            <span class="inline-block" 
+                  data-aos="fade-right" 
+                  data-aos-duration="1000" 
+                  data-aos-delay="500">
+                RAFI
+            </span>
+            
+            <span class="inline-block">&nbsp;</span>
+
+            <span class="inline-block" 
+                  data-aos="zoom-in" 
+                  data-aos-duration="1000" 
+                  data-aos-delay="700">
+                RIZKY
+            </span>
+
+            <br> <span class="inline-block text-transparent bg-clip-text bg-cyber-gradient text-glow"
+                  data-aos="fade-left" 
+                  data-aos-duration="1000" 
+                  data-aos-delay="900">
+                SANTOSA
+            </span>
+        </h1>
+
+        <h2 class="font-mono text-lg md:text-4xl text-codeGray mt-1" 
+            data-aos="fade-up" data-aos-duration="1000" data-aos-delay="1200">
+            <span class="text-neonPurple">[</span> Full-Stack Architect <span class="text-neonPurple">]</span>
+        </h2>
+    </div>
+    
+    <div class="absolute bottom-28 md:bottom-10 left-0 w-full text-center font-mono text-[10px] md:text-xs text-codeGray animate-bounce"
+         data-aos="fade-in" data-aos-delay="2000" data-aos-duration="1000">
+        SCROLL TO INITIALIZE PROFILE <i class="fa-solid fa-chevron-down ml-2 text-neonCyan"></i>
+    </div>
+</section>
 
 
         <div id="profile-trigger" class="h-10 md:h-20"></div> 
