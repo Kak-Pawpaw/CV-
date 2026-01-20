@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="id" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Rafi Rizky Santosa | Full-Stack Architect</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        cyberBlack: '#020204',
+                        deepNavy: '#0a0e17',
+                        neonCyan: '#00f3ff',
+                        neonPurple: '#bd00ff',
+                        neonGreen: '#39ff14',
+                        codeGray: '#8892b0'
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                        display: ['Syne', 'sans-serif']
+                    },
+                    backgroundImage: {
+                        'cyber-gradient': 'linear-gradient(135deg, #00f3ff, #bd00ff)'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="font-sans">
+
+    <div id="intro-loader">
+        <h2 class="loader-text text-xl md:text-2xl">
+            > <span id="typewriter-text"></span><span class="cursor-blink">_</span>
+        </h2>
+    </div>
+
+    <div id="cyber-canvas"></div>
+
+    <main id="main-content" class="relative z-10 opacity-0 w-full overflow-hidden">
+        
+        <nav class="fixed top-0 w-full z-50 py-4 md:py-6 px-6 md:px-8 flex justify-between items-center mix-blend-difference bg-cyberBlack/50 backdrop-blur-md md:bg-transparent md:backdrop-filter-none border-b border-white/10 md:border-none">
+             <a href="#hero-title" id="logo-container" class="font-mono font-bold text-lg md:text-xl tracking-wider cursor-pointer group flex items-center gap-1">
+    <span class="text-neonPurple transition-transform duration-300 group-hover:-translate-x-1">&lt;</span>
+    
+    <span id="logo-text" class="text-white group-hover:text-neonCyan transition-colors duration-300">RAFI.DEV</span>
+    
+    <span class="text-neonPurple transition-transform duration-300 group-hover:translate-x-1">/&gt;</span>
+</a>
+             
+             <div class="hidden md:flex gap-8 font-mono text-xs text-codeGray">
+                 <span>// NAVIGATION</span>
+                 <a href="#profile-trigger" class="hover:text-neonCyan transition">PROFILE</a>
+                 <a href="#skills" class="hover:text-neonCyan transition">STACK</a>
+                 <a href="#certs" class="hover:text-neonCyan transition">AWARDS</a>
+                 <a href="#services" class="hover:text-neonCyan transition">SERVICES</a>
+             </div>
+
+<button id="mobile-menu-btn" class="md:hidden text-neonCyan w-8 h-6 flex flex-col justify-between items-center z-50 relative focus:outline-none">
+    <span class="w-full h-[3px] bg-neonCyan rounded-full origin-center"></span>
+    <span class="w-full h-[3px] bg-neonCyan rounded-full origin-center"></span>
+    <span class="w-full h-[3px] bg-neonCyan rounded-full origin-center"></span>
+</button>
+        </nav>
+
+        <div id="mobile-menu" class="fixed inset-0 z-40 bg-cyberBlack/95 backdrop-blur-xl flex flex-col justify-center items-center gap-8 md:hidden">
+            <button id="close-menu-btn" class="absolute top-6 right-6 text-codeGray text-3xl"><i class="fa-solid fa-xmark"></i></button>
+            <a href="#hero-title" class="mobile-link text-2xl font-display uppercase hover:text-neonCyan">Home</a>
+            <a href="#profile-trigger" class="mobile-link text-2xl font-display uppercase hover:text-neonCyan">Profile</a>
+            <a href="#skills" class="mobile-link text-2xl font-display uppercase hover:text-neonCyan">Stack</a>
+            <a href="#certs" class="mobile-link text-2xl font-display uppercase hover:text-neonCyan">Awards</a>
+            <a href="#services" class="mobile-link text-2xl font-display uppercase hover:text-neonCyan">Services</a>
+        </div>
+
+        <section id="hero-title" class="h-screen flex flex-col justify-center px-4 md:px-20 relative overflow-hidden">
+            <div class="hero-text-container z-20 mt-10 md:mt-0">
+                <p class="font-mono text-neonCyan text-xs md:text-base mb-4 tracking-widest" data-gsap="reveal">
+    <span class="text-red-500 font-bold drop-shadow-md">> SYSTEM_READY.</span> 
+    <span class="text-neonPurple">Welcome everyone,</span> 
+    let me introduce myself.
+</p>
+<h1 class="font-display font-extrabold leading-none uppercase mb-2" 
+    style="font-size: clamp(2rem, 12vw, 10rem);">
+    RAFI RIZKY<br>
+    <span class="text-transparent bg-clip-text bg-cyber-gradient text-glow">SANTOSA</span>
+</h1>
+                <h2 class="font-mono text-lg md:text-4xl text-codeGray mt-1" data-gsap="reveal">
+                    <span class="text-neonPurple">[</span> Full-Stack Architect <span class="text-neonPurple">]</span>
+                </h2>
+            </div>
+            
+<div class="absolute bottom-28 md:bottom-10 left-0 w-full text-center font-mono text-[10px] md:text-xs text-codeGray animate-bounce">
+    SCROLL TO INITIALIZE PROFILE <i class="fa-solid fa-chevron-down ml-2 text-neonCyan"></i>
+</div>
+        </section>
+
+
+        <div id="profile-trigger" class="h-10 md:h-20"></div> 
+        
+        <section id="profile-content" class="py-10 md:py-20 px-6 md:px-20 flex flex-col md:flex-row gap-12 items-center">
+            <div class="w-full md:w-1/2 flex justify-center md:justify-end relative z-20" id="photo-container">
+                <div class="relative w-[280px] h-[380px] md:w-[400px] md:h-[500px] group">
+                    <div class="absolute inset-0 border-2 border-neonCyan/50 rounded-lg z-30 group-hover:border-neonCyan transition-all duration-500 border-glow"></div>
+                    <div class="absolute inset-2 rounded-lg overflow-hidden z-20 bg-deepNavy">
+                        <img src="assets/images/rafi-profile.jpeg" alt="Rafi Rizky Santosa" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
+                    </div>
+                     <div class="absolute inset-0 bg-cyber-gradient opacity-20 blur-xl rounded-lg z-10 group-hover:opacity-40 transition-all duration-700 -translate-x-4 translate-y-4"></div>
+                </div>
+            </div>
+
+            <div class="w-full md:w-1/2 z-20" id="bio-container">
+                <div class="tech-panel p-6 md:p-8 rounded-xl border-l-4 border-neonPurple relative">
+                    <i class="fa-solid fa-terminal text-2xl md:text-3xl text-neonPurple/50 absolute top-4 right-4"></i>
+                    <h3 class="font-mono text-neonCyan mb-4 md:mb-6">// Kata-kata hari ini...</h3>
+                    <p class="font-sans text-base md:text-lg text-gray-300 leading-relaxed relative z-10">
+                        "Guys, yuk normalisasikan kalau ada tugas IT konsultasi aja ke aku. Bukan apa-apa, soalnya aku lagi buka jasa yang <span class="text-neonCyan font-bold">worth it</span> banget loh. 
+                        <br><br>
+                        <span class="font-mono text-xs md:text-sm text-codeGray">> Coding is my cardio. Bugs are my breakfast.</span>"
+                    </p>
+                </div>
+                <div class="mt-8 flex gap-4 font-mono">
+<button onclick="openContactModal()" class="px-6 py-3 bg-neonCyan text-cyberBlack font-bold rounded hover:bg-white transition-all border-glow text-sm md:text-base cursor-pointer">
+    INITIATE_CONTACT()
+</button>
+                </div>
+            </div>
+        </section>
+
+
+<section id="skills" class="py-20 md:py-32 px-4 md:px-20 relative z-20">
+    <h2 class="font-display text-3xl md:text-5xl uppercase mb-10 md:mb-16 text-center"><span class="text-neonPurple">#</span> TECH_STACK</h2>
+    
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6" id="skill-grid">
+        
+        <div class="tech-panel p-4 md:p-6 rounded-lg text-center hover:-translate-y-2 transition-all">
+            <i class="fa-brands fa-react text-3xl md:text-4xl text-neonCyan mb-3 md:mb-4"></i>
+            <h4 class="font-mono font-bold text-xs md:text-base">React / Next.js</h4>
+        </div>
+
+        <div class="tech-panel p-4 md:p-6 rounded-lg text-center hover:-translate-y-2 transition-all">
+            <i class="fa-brands fa-laravel text-3xl md:text-4xl text-neonPurple mb-3 md:mb-4"></i>
+            <h4 class="font-mono font-bold text-xs md:text-base">Laravel</h4>
+        </div>
+
+        <div class="tech-panel p-4 md:p-6 rounded-lg text-center hover:-translate-y-2 transition-all">
+            <i class="fa-solid fa-mobile-screen-button text-3xl md:text-4xl text-neonCyan mb-3 md:mb-4"></i>
+            <h4 class="font-mono font-bold text-xs md:text-base">Mobile Dev (Flutter)</h4>
+        </div>
+
+        <div class="tech-panel p-4 md:p-6 rounded-lg text-center hover:-translate-y-2 transition-all">
+            <i class="fa-brands fa-vuejs text-3xl md:text-4xl text-neonGreen mb-3 md:mb-4"></i>
+            <h4 class="font-mono font-bold text-xs md:text-base">Vue / Nuxt.js</h4>
+        </div>
+
+        <div class="tech-panel p-4 md:p-6 rounded-lg text-center hover:-translate-y-2 transition-all">
+            <i class="fa-solid fa-network-wired text-3xl md:text-4xl text-neonPurple mb-3 md:mb-4"></i>
+            <h4 class="font-mono font-bold text-xs md:text-base">REST API / Integrations</h4>
+        </div>
+
+        <div class="tech-panel p-4 md:p-6 rounded-lg text-center hover:-translate-y-2 transition-all">
+            <i class="fa-solid fa-database text-3xl md:text-4xl text-neonCyan mb-3 md:mb-4"></i>
+            <h4 class="font-mono font-bold text-xs md:text-base">SQL / NoSQL Architect</h4>
+        </div>
+
+    </div>
+</section>
+
+
+        <section id="certs" class="py-20 relative z-20">
+            <div class="px-6 md:px-20 mb-8 md:mb-12 text-center">
+                <h2 class="font-display text-3xl md:text-5xl uppercase"><span class="text-neonCyan">#</span> MY_AWARDS</h2>
+                <p class="font-mono text-codeGray text-xs md:text-base mt-4"><i class="fa-solid fa-arrow-left animate-pulse mr-2"></i> Horizontal scroll detected... Continue scrolling down to see.</p>
+            </div>
+            
+            <div id="cert-pin-wrap" class="h-[60vh] md:h-[80vh] w-full overflow-hidden flex items-center bg-deepNavy/50 border-y border-neonCyan/20">
+                <div id="cert-move-wrap" class="cert-wrapper">
+                    
+                    <div class="cert-item">
+                        <img src="assets/images/sertif1.jpg" alt="Juara 2 Nasional IT" class="cert-img">
+                        <div class="absolute inset-0 bg-cyberBlack/80 flex flex-col justify-end p-6 opacity-0 hover:opacity-100 transition-opacity">
+                            <h4 class="font-mono text-lg md:text-xl text-neonCyan">JUARA 2 NASIONAL</h4>
+                            <p class="font-sans text-xs md:text-sm text-gray-300">Indonesia IT Competition 2025</p>
+                        </div>
+                    </div>
+
+                    <div class="cert-item">
+                        <img src="assets/images/sertif2.jpg" alt="Juara 3 KTI" class="cert-img">
+                        <div class="absolute inset-0 bg-cyberBlack/80 flex flex-col justify-end p-6 opacity-0 hover:opacity-100 transition-opacity">
+                            <h4 class="font-mono text-lg md:text-xl text-neonPurple">JUARA 3 KTI</h4>
+                            <p class="font-sans text-xs md:text-sm text-gray-300">Rakernas APTI 2025</p>
+                        </div>
+                    </div>
+
+                    <div class="cert-item">
+                        <img src="assets/images/sertif3.jpg" alt="Asisten Lab" class="cert-img">
+                        <div class="absolute inset-0 bg-cyberBlack/80 flex flex-col justify-end p-6 opacity-0 hover:opacity-100 transition-opacity">
+                            <h4 class="font-mono text-lg md:text-xl text-neonGreen">Asisten Laboratorium</h4>
+                            <p class="font-sans text-xs md:text-sm text-gray-300">Teknik Informatika ITS PKU Surakarta</p>
+                        </div>
+                    </div>
+
+                    <div class="cert-item tech-panel flex items-center justify-center">
+                        <div class="text-center font-mono text-codeGray p-4">
+                            <i class="fa-solid fa-lock text-3xl md:text-4xl mb-4 opacity-50"></i>
+                            <p class="text-sm md:text-base">MORE_ACHIEVEMENTS_LOCKED</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+<div id="contact-modal" class="fixed inset-0 z-[100] hidden items-center justify-center">
+    <div class="absolute inset-0 bg-cyberBlack/90 backdrop-blur-sm" onclick="closeContactModal()"></div>
+    
+    <div class="tech-panel p-8 rounded-xl border border-neonCyan/50 max-w-md w-[90%] relative z-10 transform scale-95 opacity-0 transition-all duration-300" id="modal-box">
+        
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="font-display text-2xl uppercase text-white"><span class="text-neonPurple">#</span> SELECT_CHANNEL</h3>
+            <button onclick="closeContactModal()" class="text-codeGray hover:text-red-500 text-2xl"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <p class="font-mono text-sm text-gray-400 mb-8">
+            > Protocol initiated. Silakan pilih jalur komunikasi untuk order joki atau konsultasi.
+        </p>
+
+        <div class="flex flex-col gap-4">
+            
+            <a href="https://wa.me/6282136659712?text=Halo%20Bang%20Rafi!%20%F0%9F%91%8B%0A%0ASaya%20mau%20order%20jasa%20joki%20coding%20dong.%0A%0A%3E%20Jenis%20Tugas%3A%20(Web%2FMobile%2FTugas%20Kampus)%0A%3E%20Deadline%3A%20...%0A%3E%20Budget%20Range%3A%20...%0A%0ABisa%20dibantu%20gak%20bang%3F" 
+               target="_blank" 
+               class="group flex items-center justify-between p-4 rounded-lg border border-neonGreen/30 bg-neonGreen/10 hover:bg-neonGreen hover:text-cyberBlack transition-all duration-300">
+                <div class="flex items-center gap-4">
+                    <i class="fa-brands fa-whatsapp text-3xl text-neonGreen group-hover:text-cyberBlack"></i>
+                    <div class="text-left">
+                        <h4 class="font-mono font-bold">WHATSAPP_SECURE</h4>
+                        <p class="text-xs opacity-70">Fast Response (Joki Priority)</p>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right"></i>
+            </a>
+
+            <a href="mailto:rafisantosa0028@gmail.com?subject=ORDER%20PROJECT%20-%20[NAMA_KLIEN]&body=Halo%20Rafi,%0A%0ASaya%20tertarik%20untuk%20kerjasama%20project..." 
+               class="group flex items-center justify-between p-4 rounded-lg border border-neonCyan/30 bg-neonCyan/10 hover:bg-neonCyan hover:text-cyberBlack transition-all duration-300">
+                <div class="flex items-center gap-4">
+                    <i class="fa-solid fa-envelope text-3xl text-neonCyan group-hover:text-cyberBlack"></i>
+                    <div class="text-left">
+                        <h4 class="font-mono font-bold">ENCRYPTED_MAIL</h4>
+                        <p class="text-xs opacity-70">Untuk detail project besar</p>
+                    </div>
+                </div>
+                <i class="fa-solid fa-chevron-right"></i>
+            </a>
+
+        </div>
+
+        <div class="mt-6 text-center font-mono text-[10px] text-codeGray">
+            // Session ID: <span id="session-id">LOADING...</span>
+        </div>
+    </div>
+</div>
+
+<section id="services" class="py-20 md:py-32 px-4 md:px-20 relative z-20 w-full overflow-hidden">
+    
+    <div class="text-center mb-10 md:mb-16">
+        <h2 class="font-display text-3xl md:text-6xl uppercase break-words">
+            <span class="text-neonGreen">#</span> SERVICE_MENU
+        </h2>
+        <p class="font-mono text-codeGray mt-4 text-xs md:text-base">// Pilih paket sesuai mood kamu aja... hehe.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto w-full">
+        
+        <div class="pricing-card border border-white/10 rounded-2xl p-6 md:p-8 relative overflow-hidden group w-full">
+            <div class="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-100 transition-opacity">
+                <i class="fa-solid fa-code text-5xl md:text-6xl text-gray-500"></i>
+            </div>
+            <h3 class="font-mono text-lg md:text-xl text-gray-400 mb-2">LEVEL_1</h3>
+            <h4 class="font-display text-2xl md:text-3xl text-white mb-6">TUGAS KAMPUS</h4>
+            <div class="h-px w-full bg-white/10 mb-6"></div>
+            <ul class="font-mono text-xs md:text-sm text-gray-300 space-y-4 mb-8">
+                <li><i class="fa-solid fa-check text-neonGreen mr-2"></i> Algoritma Dasar</li>
+                <li><i class="fa-solid fa-check text-neonGreen mr-2"></i> CRUD Sederhana</li>
+                <li><i class="fa-solid fa-check text-neonGreen mr-2"></i> Laporan Praktikum</li>
+                <li><i class="fa-solid fa-clock text-codeGray mr-2"></i> 1-2 Hari Kerja</li>
+            </ul>
+            <p class="font-mono text-neonCyan text-lg md:text-xl mb-6">Start from Rp 50k</p>
+            <button onclick="openContactModal()" class="w-full py-3 border border-white/20 rounded font-bold hover:bg-white hover:text-black transition-all text-sm md:text-base">
+                ORDER_NOW
+            </button>
+        </div>
+
+        <div class="pricing-card border-2 border-neonPurple rounded-2xl p-6 md:p-8 relative overflow-hidden transform md:-translate-y-4 w-full">
+            <div class="absolute top-0 left-0 w-full text-center py-1 text-[10px] popular-badge">
+                MOST_REQUESTED
+            </div>
+            <div class="absolute top-10 right-0 p-4 opacity-40">
+                <i class="fa-solid fa-layer-group text-5xl md:text-6xl text-neonPurple"></i>
+            </div>
+            <h3 class="font-mono text-lg md:text-xl text-neonPurple mb-2 mt-4">LEVEL_99</h3>
+            <h4 class="font-display text-2xl md:text-3xl text-white mb-6">FULL PROJECT</h4>
+            <div class="h-px w-full bg-neonPurple/50 mb-6"></div>
+            <ul class="font-mono text-xs md:text-sm text-gray-300 space-y-4 mb-8">
+                <li><i class="fa-solid fa-check text-neonPurple mr-2"></i> Web / Mobile Apps</li>
+                <li><i class="fa-solid fa-check text-neonPurple mr-2"></i> Skripsi / TA</li>
+                <li><i class="fa-solid fa-check text-neonPurple mr-2"></i> Database & API</li>
+                <li><i class="fa-solid fa-check text-neonPurple mr-2"></i> Free Revisi Minor</li>
+            </ul>
+            <p class="font-mono text-neonPurple text-lg md:text-xl mb-6">Nego sampai jadi</p>
+            <button onclick="openContactModal()" class="w-full py-3 bg-neonPurple text-white rounded font-bold hover:bg-white hover:text-black transition-all shadow-[0_0_20px_rgba(189,0,255,0.3)] text-sm md:text-base">
+                CONSULT_NOW
+            </button>
+        </div>
+
+        <div class="pricing-card border border-white/10 rounded-2xl p-6 md:p-8 relative overflow-hidden group w-full">
+            <div class="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-100 transition-opacity">
+                <i class="fa-solid fa-fire text-5xl md:text-6xl text-red-500"></i>
+            </div>
+            <h3 class="font-mono text-lg md:text-xl text-red-500 mb-2">PANIC_MODE</h3>
+            <h4 class="font-display text-2xl md:text-3xl text-white mb-6">S.O.S DEADLINE</h4>
+            <div class="h-px w-full bg-white/10 mb-6"></div>
+            <ul class="font-mono text-xs md:text-sm text-gray-300 space-y-4 mb-8">
+                <li><i class="fa-solid fa-check text-red-500 mr-2"></i> Deadline < 24 Jam</li>
+                <li><i class="fa-solid fa-check text-red-500 mr-2"></i> Prioritas Utama</li>
+                <li><i class="fa-solid fa-check text-red-500 mr-2"></i> Begadang Mode: ON</li>
+                <li><i class="fa-solid fa-skull text-codeGray mr-2"></i> Mental Health</li>
+            </ul>
+            <p class="font-mono text-red-500 text-lg md:text-xl mb-6">Price x 2</p>
+            <button onclick="openContactModal()" class="w-full py-3 border border-red-500 text-red-500 rounded font-bold hover:bg-red-500 hover:text-white transition-all text-sm md:text-base">
+                EMERGENCY_CALL
+            </button>
+        </div>
+
+    </div>
+</section>
+
+<section id="reviews" class="py-20 relative z-20 overflow-hidden bg-deepNavy/30 border-y border-neonCyan/10">
+    
+    <div class="container mx-auto px-6 mb-10 text-center">
+        <h3 class="font-mono text-neonGreen text-sm tracking-[0.3em] animate-pulse">
+            /// DECRYPTED_CLIENT_FEEDBACK
+        </h3>
+    </div>
+
+    <div class="marquee-container flex w-full overflow-hidden">
+        <div class="marquee-track flex gap-6 pr-6" id="review-track">
+            
+            <div class="review-card tech-panel p-6 rounded-lg w-[300px] flex-shrink-0 border-l-2 border-neonCyan">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-neonCyan to-blue-600"></div>
+                    <div>
+                        <h4 class="font-mono text-xs font-bold text-white">Anonim</h4>
+                        <p class="text-[10px] text-codeGray">Project: Web Laravel</p>
+                    </div>
+                </div>
+                <p class="font-sans text-sm text-gray-300 italic">"Gila bang, deadline 3 jam lagi kelar dong. Kodingan rapi banget dosen ga curiga samsek. Next order lagi!"</p>
+                <div class="mt-3 flex text-neonCyan text-xs">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+            </div>
+
+            <div class="review-card tech-panel p-6 rounded-lg w-[300px] flex-shrink-0 border-l-2 border-neonPurple">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-neonPurple to-pink-600"></div>
+                    <div>
+                        <h4 class="font-mono text-xs font-bold text-white">Mhs_Semester_Akhir</h4>
+                        <p class="text-[10px] text-codeGray">Project: Skripsi Fullstack</p>
+                    </div>
+                </div>
+                <p class="font-sans text-sm text-gray-300 italic">"Revisi minor diladenin terus sampe acc. Harga mahasiswa banget tapi kualitas pejabat. Thanks bang Rafi!"</p>
+                <div class="mt-3 flex text-neonPurple text-xs">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+            </div>
+
+            <div class="review-card tech-panel p-6 rounded-lg w-[300px] flex-shrink-0 border-l-2 border-neonGreen">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-neonGreen to-emerald-600"></div>
+                    <div>
+                        <h4 class="font-mono text-xs font-bold text-white">User_8821</h4>
+                        <p class="text-[10px] text-codeGray">Project: Tugas C++</p>
+                    </div>
+                </div>
+                <p class="font-sans text-sm text-gray-300 italic">"Definisi joki bintang lima harga kaki lima. Penjelasannya enak, pas sidang gue bisa jawab semua."</p>
+                <div class="mt-3 flex text-neonGreen text-xs">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+            </div>
+
+            <div class="review-card tech-panel p-6 rounded-lg w-[300px] flex-shrink-0 border-l-2 border-red-500">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-red-500 to-orange-600"></div>
+                    <div>
+                        <h4 class="font-mono text-xs font-bold text-white">Panic_Buyer</h4>
+                        <p class="text-[10px] text-codeGray">Project: SOS Deadline</p>
+                    </div>
+                </div>
+                <p class="font-sans text-sm text-gray-300 italic">"Nyawa selamat! H-1 jam tugas dikirim dan work 100%. Recommended parah buat yang kepepet."</p>
+                <div class="mt-3 flex text-red-500 text-xs">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+        
+        <footer class="py-8 text-center font-mono text-[10px] md:text-xs text-codeGray border-t border-neonCyan/10 relative z-20 bg-cyberBlack">
+            <p>// © 2026 Kak Pawpaw. End of Line.</p>
+        </footer>
+
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
