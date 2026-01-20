@@ -314,13 +314,44 @@ try {
         console.log("Data berhasil didapat:", reviews);
         
         // 3. Opsi Styling Acak (Agar variatif)
-        const styles = [
-            { border: 'border-neonCyan', bg: 'from-neonCyan to-blue-600', text: 'text-neonCyan' },
-            { border: 'border-neonPurple', bg: 'from-neonPurple to-pink-600', text: 'text-neonPurple' },
-            { border: 'border-neonGreen', bg: 'from-neonGreen to-emerald-600', text: 'text-neonGreen' },
-            { border: 'border-red-500', bg: 'from-red-500 to-orange-600', text: 'text-red-500' }
-        ];
+// Pilih Warna Lampu (Hex Codes) sesuai tema
+            const neonColors = ['#00f3ff', '#bd00ff', '#39ff14', '#ff003c'];
+            const randomColor = neonColors[Math.floor(Math.random() * neonColors.length)];
+            
+            // Tentukan class text warna bintang agar matching dengan lampunya
+            let starColorClass = '';
+            if(randomColor === '#00f3ff') starColorClass = 'text-neonCyan';
+            else if(randomColor === '#bd00ff') starColorClass = 'text-neonPurple';
+            else if(randomColor === '#39ff14') starColorClass = 'text-neonGreen';
+            else starColorClass = 'text-red-500';
 
+            // Buat Element Kartu Baru dengan Style NEON
+            const card = document.createElement('div');
+            
+            // Tambahkan class neon-card dan p-6
+            // Pastikan class di JS sama dengan di HTML agar tidak belang
+            card.className = `review-card tech-panel p-6 rounded-lg w-[300px] flex-shrink-0 border-l-2 ${style.border}`;
+            
+            // PENTING: Inject variable warna ke CSS inline
+            card.style.setProperty('--neon-color', randomColor);
+            
+            card.innerHTML = `
+                <div class="neon-card-content">
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-8 h-8 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 border border-white/20"></div>
+                        <div>
+                            <h4 class="font-mono text-xs font-bold text-white">${safeName}</h4>
+                            <p class="text-[10px] text-codeGray">Project: ${item.project || 'Joki Tugas'}</p>
+                        </div>
+                    </div>
+                    <p class="font-sans text-sm text-gray-300 italic mb-3">"${item.review}"</p>
+                    <div class="flex ${starColorClass} text-xs">
+                        ${starsHtml}
+                    </div>
+                </div>
+            `;
+
+            track.appendChild(card);
         // 4. Loop data baru & Masukkan ke HTML
         reviews.forEach(item => {
             // --- LOGIKA PRIVASI NAMA ---
@@ -379,42 +410,113 @@ function startMarquee() {
     const marqueeContainer = document.querySelector('.marquee-container');
     const track = document.getElementById('review-track');
     
-    // Pastikan track ada dan punya isi
+    // Pastikan track ada
     if(track && track.children.length > 0) {
         
-        // 1. KLONING GANDA (SAFETY NET)
-        // Kita clone 2 kali agar kalau layar lebar, tidak ada ruang kosong hitam
+        // 1. BERSIHKAN KLONINGAN LAMA (PENTING)
+        // Biar kalau fungsi dipanggil 2x tidak numpuk
+        const oldClones = marqueeContainer.querySelectorAll('.clone-track');
+        oldClones.forEach(el => el.remove());
+
+        // 2. DUPLIKASI TRACK (CLONE)
         const clone1 = track.cloneNode(true);
         const clone2 = track.cloneNode(true);
         
-        // Atribut aksesibilitas agar tidak dibaca screen reader berulang
+        // Tandai sebagai clone biar gampang diatur
+        clone1.classList.add('clone-track');
+        clone2.classList.add('clone-track');
+        
         clone1.setAttribute('aria-hidden', 'true'); 
-        clone2.setAttribute('aria-hidden', 'true'); 
+        clone2.setAttribute('aria-hidden', 'true');
+        clone1.removeAttribute('id');
+        clone2.removeAttribute('id');
         
         marqueeContainer.appendChild(clone1);
         marqueeContainer.appendChild(clone2);
 
-        // 2. TUNGGU FONT LOAD (Agar perhitungan lebar akurat)
-        document.fonts.ready.then(() => {
+        // 3. FUNGSI JALAN ANIMASI
+        const playAnim = () => {
+            // Ambil lebar track ASLI (Konten + Padding + Gap)
+            // scrollWidth jauh lebih akurat daripada offsetWidth
+            const trackWidth = track.scrollWidth; 
             
-            // 3. ANIMASI GSAP (SMOOTH & ANTI PUTUS)
-            // Kita gerakkan semua track ke kiri sejauh -100% dari lebar track aslinya
-            // ease: "linear" wajib agar tidak ada perlambatan di awal/akhir
-            
-            gsap.to('.marquee-track', {
-                xPercent: -100, 
-                repeat: -1, 
-                duration: 40, // Atur kecepatan (makin besar = makin pelan)
+            // Tambahkan GAP (24px) ke dalam perhitungan jarak tempuh
+            // Agar saat reset, posisinya pas di kartu pertama
+            const gapValue = 24; 
+            const distanceToMove = trackWidth + gapValue;
+
+            // Debugging: Cek di console apakah lebarnya terdeteksi
+            console.log("Lebar Track:", trackWidth, "Jarak Tempuh:", distanceToMove);
+
+            // Jika lebar masih 0 (belum render), coba lagi dalam 100ms
+            if(distanceToMove <= 24) {
+                setTimeout(playAnim, 100);
+                return;
+            }
+
+            // Hentikan animasi lama jika ada (biar gak tabrakan)
+            gsap.killTweensOf(".marquee-track");
+
+            // JALANKAN ANIMASI
+            gsap.to(".marquee-track", {
+                x: -distanceToMove, 
+                duration: 40, // Kecepatan
                 ease: "linear",
+                repeat: -1,
                 modifiers: {
-                    // Fitur Modifiers GSAP (Opsional, tapi bagus untuk presisi)
-                    // Memastikan xPercent selalu presisi saat looping
-                    xPercent: gsap.utils.unitize(x => parseFloat(x) % 100) 
+                    x: gsap.utils.unitize(x => parseFloat(x) % distanceToMove)
                 }
             });
-        });
+        };
+
+        // 4. EKSEKUSI (Dengan sedikit delay agar CSS render dulu)
+        // document.fonts.ready saja kadang tidak cukup untuk layout flexbox
+        setTimeout(() => {
+            document.fonts.ready.then(playAnim);
+        }, 500); // Delay 0.5 detik
     }
 }
 
+// --- 10. ANTI-GRAVITY EFFECT (FOOTER CLICK) ---
+function triggerAntiGravity() {
+    const symbols = ['< />', '{ }', '01', 'PHP', 'JS', '404', 'ERROR', 'NULL', '$$$', ';', '?!'];
+    const colors = ['#00f3ff', '#bd00ff', '#39ff14', '#ff003c', '#ffffff'];
+    
+    // Buat 30 partikel terbang
+    for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('gravity-particle');
+        
+        // Isi acak
+        particle.innerText = symbols[Math.floor(Math.random() * symbols.length)];
+        
+        // Warna acak
+        particle.style.color = colors[Math.floor(Math.random() * colors.length)];
+        
+        // Ukuran acak
+        particle.style.fontSize = Math.floor(Math.random() * 20 + 10) + 'px'; // 10px - 30px
+        
+        // Posisi awal (Di sekitar tengah bawah layar/footer)
+        // random x antara 10% sampai 90% lebar layar
+        const startX = (Math.random() * window.innerWidth);
+        particle.style.left = startX + 'px';
+        particle.style.bottom = '50px'; // Mulai dari footer
+        
+        document.body.appendChild(particle);
+
+        // Animasi GSAP Terbang ke Atas
+        gsap.to(particle, {
+            y: -window.innerHeight - 100, // Terbang sampai lewat atas layar
+            x: gsap.utils.random(-100, 100), // Sedikit goyang kanan kiri
+            rotation: gsap.utils.random(-360, 360), // Muter-muter
+            opacity: 0,
+            duration: gsap.utils.random(2, 5), // Durasi acak 2-5 detik
+            ease: "power1.out",
+            onComplete: () => {
+                particle.remove(); // Hapus elemen biar memori gak penuh
+            }
+        });
+    }
+}
 // Panggil fungsi utama
 loadReviews();

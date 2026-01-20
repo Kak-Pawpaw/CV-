@@ -35,7 +35,7 @@ Desain futuristik dengan efek *glow*, *neon borders*, dan tipografi *monospace* 
 
 ### 3. 💬 Dynamic Review System (Google Sheets)
 Fitur unggulan! Testimoni pelanggan diambil secara **Real-time** dari Google Spreadsheet.
-* **Hybrid Mode:** Menampilkan review (dari data klien).
+* **Hybrid Mode:** Menampilkan review (dari data klien) secara real-time.
 * **Privacy Protection:** Nama klien otomatis disensor oleh algoritma JavaScript (contoh: `Rafi` -> `Raf_User88`).
 * **Auto Styling:** Warna kartu review diacak otomatis agar variatif.
 

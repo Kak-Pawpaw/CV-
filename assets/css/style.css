@@ -1,12 +1,26 @@
+/* --- FIX STRUKTUR HALAMAN --- */
 html, body {
     width: 100%;
-    max-width: 100vw; /* Paksa lebar maksimal selebar viewport */
-    overflow-x: hidden; /* Potong apapun yang lewat garis */
+    max-width: 100vw;
+    overflow-x: hidden;
     margin: 0;
     padding: 0;
     background-color: #020204;
     color: #ffffff;
-    touch-action: pan-y; /* Fix untuk scroll lancar di HP */
+    touch-action: pan-y;
+    
+    /* TAMBAHAN WAJIB AGAR FOOTER DI BAWAH: */
+    min-height: 100vh;      /* Minimal setinggi layar */
+    display: flex;          /* Pakai flexbox */
+    flex-direction: column; /* Susun ke bawah */
+}
+
+/* Agar konten utama mendorong footer ke bawah */
+#main-content {
+    flex-grow: 1; 
+    width: 100%;
+    position: relative;
+    z-index: 10;
 }
         /* Scrollbar Keren */
         ::-webkit-scrollbar { width: 6px; }
@@ -100,12 +114,91 @@ position: fixed; inset: 0; z-index: 0; pointer-events: none; /* Ubah z-index jad
 }
 
 /* --- OPTIMASI ANIMASI MARQUEE --- */
-.marquee-track {
-    /* Memberitahu browser bahwa elemen ini akan bergerak terus */
-    /* Ini mengaktifkan GPU Acceleration agar tidak patah-patah */
-    will-change: transform;
-    
-    /* Memastikan elemen sejajar rapi */
+/* --- UPDATE CSS MARQUEE --- */
+
+/* --- CSS FINAL: TAMPILAN CARD & MARQUEE --- */
+
+.marquee-container {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: nowrap;     /* Wajib satu baris */
+    width: 100%;
+    overflow: hidden;
+    gap: 1.5rem;
+    position: relative;
+    z-index: 10;
+    padding: 10px 0; /* Sedikit padding atas-bawah biar border glow gak kepotong */
+}
+
+.marquee-track {
+    display: flex;
+    gap: 1.5rem;
+    flex-shrink: 0;
+    width: max-content;
+    will-change: transform;
+}
+
+/* --- SETTING KARTU BIAR GANTENG --- */
+.neon-card {
+    position: relative;
+    overflow: hidden;
+    
+    /* Ukuran Pas (Tidak Gepeng) */
+    width: 320px;       /* Sedikit dilebarkan biar lega */
+    min-width: 320px;
+    height: auto;       /* Tinggi menyesuaikan isi teks */
+    min-height: 240px;  /* Tapi minimal segini biar kotak rapi */
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Konten di tengah vertikal */
+    border-radius: 16px;     /* Sudut lebih membulat */
+    padding: 2px;
+    background: transparent;
+    z-index: 1;
+}
+
+/* Teks Review */
+.neon-card p {
+    white-space: normal !important; /* Wajib: Biar teks turun ke bawah */
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    flex-grow: 1; /* Biar ngisi ruang kosong */
+}
+
+/* --- EFEK LAMPU (SAMA) --- */
+.neon-card::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 200%; height: 200%;
+    background: conic-gradient(transparent, transparent, transparent, var(--neon-color));
+    transform: translate(-50%, -50%);
+    animation: rotateBorder 4s linear infinite;
+    z-index: -2;
+}
+
+.neon-card::after {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    background: rgba(10, 14, 23, 0.95);
+    border-radius: 14px;
+    z-index: -1;
+}
+/* Animasi Putaran */
+@keyframes rotateBorder {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* --- ANTI GRAVITY PARTICLES --- */
+.gravity-particle {
+    position: fixed;
+    bottom: 0;
+    pointer-events: none; /* Biar gak ngehalangin klik */
+    z-index: 9999;        /* Paling depan */
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: bold;
+    text-shadow: 0 0 5px currentColor;
+    user-select: none;
 }
