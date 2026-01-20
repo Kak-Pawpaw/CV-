@@ -7,7 +7,6 @@
 Website portofolio personal dengan nuansa **Cyberpunk / Hacker aesthetic**. Dibangun dengan fokus pada performa, animasi interaktif, dan integrasi data dinamis tanpa backend server tradisional.
 
 🔗 **Live Demo:** [https://kak-pawpaw.github.io/CV-](https://kak-pawpaw.github.io/CV-) 
-*(Pastikan link ini sesuai dengan link GitHub Pages Anda nanti)*
 
 ---
 
